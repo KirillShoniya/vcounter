@@ -2,10 +2,3 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: vcounter
-  limits:
-    - default:
-        memory: 4096Mi
-        cpu: 4
-      defaultRequest:
-        memory: 2048Mi
-        cpu: 2
