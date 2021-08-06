@@ -27,9 +27,11 @@ ESCAPED_REPLACE=$(printf '%s\n' "$ImageTag" | sed -e 's/[\/&]/\\&/g')
 sed "s/IMAGE_NAME/$ESCAPED_REPLACE/g" $DeployDirectory/vcount/deployment.sample.yml > $DeployDirectory/vcount/deployment.yml
 
 kubectl create secret generic gitlab-registry-credentials --from-file=$DockerConfigPath --type=kubernetes.io/dockerconfigjson
-kubectl get secret gitlab-registry-credentials -o yaml | sed 's/default/vcounter/g' | kubectl apply -f -
 
 kubectl apply -f "$DeployDirectory/vcount/namespace.yml"
+
+kubectl get secret gitlab-registry-credentials -o yaml | sed 's/default/vcounter/g' | kubectl apply -n vcounter -f -
+
 kubectl apply -f "$DeployDirectory/vcount/service.yml"
 kubectl apply -f "$DeployDirectory/vcount/deployment.yml"
 kubectl apply -f "$DeployDirectory/vcount/ingress.yml"
