@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vcounter
+  namespace: vcounter
+  labels:
+    app: vcounter
+spec:
+  selector:
+    matchLabels:
+      app: vcounter
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: vcounter
+    spec:
+      imagePullSecrets:
+      - name: gitlab-registry-credentials
+      containers:
+        - name: vcounter
+          image: IMAGE_NAME
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: http://localhost/
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+      restartPolicy: Always

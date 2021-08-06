@@ -1,0 +1,6 @@
+/.idea
+/.env
+/deployment/k8s/local/vcount/deployment.yml
+/conf/config.local.yaml
+/dist
+/requirements.txt
