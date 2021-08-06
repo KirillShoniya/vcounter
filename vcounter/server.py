@@ -21,7 +21,7 @@ def handle_invalid_usage(error):
     return response
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def status_page():
     """ Status page. Shows how health of the service """
     app.logger.debug('Status page requested')
@@ -73,7 +73,7 @@ def visited_links():
     return jsonify(content)
 
 
-@app.route('/visited_domains')
+@app.route('/visited_domains', methods=['GET'])
 def visited_domains():
     """
     Endpoint for filtering data from database.

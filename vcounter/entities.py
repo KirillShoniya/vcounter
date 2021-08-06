@@ -14,5 +14,6 @@ class InvalidUsage(Exception):
 
     def to_dict(self) -> dict:
         error_info = dict(self.payload or ())
+        error_info['status'] = 'error'
         error_info['message'] = self.message
         return error_info
